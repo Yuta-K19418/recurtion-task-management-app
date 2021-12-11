@@ -1,7 +1,12 @@
 import React from "react";
+import AppBar from "./appBar";
 
 function App() {
-  return <div className="App">Hello!</div>;
+  return (
+    <React.Fragment>
+      <AppBar />
+    </React.Fragment>
+  );
 }
 
 export default App;
