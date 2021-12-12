@@ -52,7 +52,7 @@ const TaskSectionCard = (props: Props) => {
             key={task.taskId}
             taskSectionId={props.taskSectionId}
             taskSectionName={props.taskSectionName}
-            taskCardId={task.taskId}
+            taskId={task.taskId}
           />
         ))}
         <Button sx={{ m: 0, p: 0 }} onClick={onAddTaskCard}>

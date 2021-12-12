@@ -7,14 +7,21 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { DeleteTaskCardAction } from "../actions/sections";
 
 interface Props {
   taskSectionId: string;
   taskSectionName: string;
-  taskCardId: string;
+  taskId: string;
 }
 
 const TaskCard = (props: Props) => {
+  const dispatch = useDispatch();
+  const onDeleteTaskCard = () => {
+    dispatch(DeleteTaskCardAction(props.taskSectionId, props.taskId));
+  };
+
   return (
     <Card sx={{ height: 140, p: 0, mb: 1 }}>
       <CardContent>
@@ -24,7 +31,7 @@ const TaskCard = (props: Props) => {
           {props.taskSectionName === "" ? "" : `: ${props.taskSectionName}`}
         </Typography>
         <Box sx={{ display: "inline-flex", justifyContent: "flex-end" }}>
-          <Button sx={{ m: 0, p: 0 }}>
+          <Button sx={{ m: 0, p: 0 }} onClick={onDeleteTaskCard}>
             <DeleteTwoToneIcon />
           </Button>
         </Box>
