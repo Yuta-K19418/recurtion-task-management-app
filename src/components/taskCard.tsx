@@ -1,14 +1,18 @@
+import Input from "@mui/icons-material/Input";
+import Star from "@mui/icons-material/Star";
+import Check from "@mui/icons-material/Check";
 import DeleteTwoToneIcon from "@mui/icons-material/DeleteTwoTone";
 import {
   Box,
-  Button,
   Card,
   CardContent,
+  IconButton,
   TextField,
   Typography,
 } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { DeleteTaskCardAction } from "../actions/sections";
+import { useState } from "react";
 
 interface Props {
   taskSectionId: string;
@@ -17,6 +21,20 @@ interface Props {
 }
 
 const TaskCard = (props: Props) => {
+  const [inputButtonState, setInputButtonState] = useState(false);
+  const [checkButtonState, setCheckButtonState] = useState(false);
+  const [starButtonState, setStarButtonState] = useState(false);
+
+  const onInput = () => {
+    setInputButtonState(!inputButtonState);
+  };
+  const onCheck = () => {
+    setCheckButtonState(!checkButtonState);
+  };
+  const onStar = () => {
+    setStarButtonState(!starButtonState);
+  };
+
   const dispatch = useDispatch();
   const onDeleteTaskCard = () => {
     dispatch(DeleteTaskCardAction(props.taskSectionId, props.taskId));
@@ -26,14 +44,32 @@ const TaskCard = (props: Props) => {
     <Card sx={{ height: 140, p: 0, mb: 1 }}>
       <CardContent>
         <TextField variant="standard" size="small" placeholder="Task Name" />
-        <Typography sx={{ mx: 1, mt: 2 }} color="#808080">
+        <Typography sx={{ mt: 2 }} color="#808080">
           Section Name
           {props.taskSectionName === "" ? "" : `: ${props.taskSectionName}`}
         </Typography>
         <Box sx={{ display: "inline-flex", justifyContent: "flex-end" }}>
-          <Button sx={{ m: 0, p: 0 }} onClick={onDeleteTaskCard}>
+          <IconButton
+            color={inputButtonState ? "success" : "default"}
+            onClick={onInput}
+          >
+            <Input />
+          </IconButton>
+          <IconButton
+            color={checkButtonState ? "success" : "default"}
+            onClick={onCheck}
+          >
+            <Check />
+          </IconButton>
+          <IconButton
+            color={starButtonState ? "success" : "default"}
+            onClick={onStar}
+          >
+            <Star />
+          </IconButton>
+          <IconButton onClick={onDeleteTaskCard}>
             <DeleteTwoToneIcon />
-          </Button>
+          </IconButton>
         </Box>
       </CardContent>
     </Card>
