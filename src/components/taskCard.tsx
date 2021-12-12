@@ -51,18 +51,27 @@ const TaskCard = (props: Props) => {
         <Box sx={{ display: "inline-flex", justifyContent: "flex-end" }}>
           <IconButton
             color={inputButtonState ? "success" : "default"}
+            style={{
+              backgroundColor: inputButtonState ? "#DDDDDD" : "transparent",
+            }}
             onClick={onInput}
           >
             <Input />
           </IconButton>
           <IconButton
             color={checkButtonState ? "success" : "default"}
+            style={{
+              backgroundColor: checkButtonState ? "#DDDDDD" : "transparent",
+            }}
             onClick={onCheck}
           >
             <Check />
           </IconButton>
           <IconButton
             color={starButtonState ? "success" : "default"}
+            style={{
+              backgroundColor: starButtonState ? "#DDDDDD" : "transparent",
+            }}
             onClick={onStar}
           >
             <Star />
