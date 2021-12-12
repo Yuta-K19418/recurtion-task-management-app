@@ -14,17 +14,11 @@ interface Props {
 const TaskSectionCard = (props: Props) => {
   let tasks: Task[] = [];
   useSelector((state: RootState) => state.sections["sections"])
-    .filter(
-      (section: TaskSection) => section.taskSectionId === props.taskSectionId
-    )
-    .map((section: TaskSection) =>
-      section.tasks.map((task: Task) => tasks.push(task))
-    );
+    .filter((section: TaskSection) => section.taskSectionId === props.taskSectionId)
+    .map((section: TaskSection) => section.tasks.map((task: Task) => tasks.push(task)));
 
   const dispatch = useDispatch();
-  const onInputSectionName = (
-    event: React.ChangeEvent<HTMLTextAreaElement>
-  ) => {
+  const onInputSectionName = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     dispatch(InputSectionNameAction(props.taskSectionId, event.target.value));
   };
 
@@ -41,9 +35,7 @@ const TaskSectionCard = (props: Props) => {
               variant="standard"
               size="small"
               placeholder="Section Name"
-              onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) =>
-                onInputSectionName(event)
-              }
+              onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => onInputSectionName(event)}
             />
           </CardContent>
         </Card>

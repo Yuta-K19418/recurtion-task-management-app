@@ -11,9 +11,7 @@ const style = {
 };
 
 const Main = () => {
-  const sections = useSelector(
-    (state: RootState) => state.sections["sections"]
-  );
+  const sections = useSelector((state: RootState) => state.sections["sections"]);
   return (
     <div style={style}>
       {sections.map((section: TaskSection) => (
