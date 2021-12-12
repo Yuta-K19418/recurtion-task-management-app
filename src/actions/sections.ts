@@ -36,3 +36,23 @@ export const InputSectionNameAction = (
     },
   };
 };
+
+export const AddTaskCardAction = (
+  taskSectionId: string
+): SectionsType["action"] => {
+  return {
+    type: ACTION_TYPE.ADD_CARD,
+    payload: {
+      taskSection: {
+        taskSectionId: taskSectionId,
+        taskSectionName: "",
+        tasks: [
+          {
+            taskId: shortid.generate(),
+            taskName: "",
+          },
+        ],
+      },
+    },
+  };
+};

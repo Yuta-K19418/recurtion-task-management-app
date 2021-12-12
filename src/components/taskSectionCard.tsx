@@ -4,7 +4,7 @@ import TaskCard from "./taskCard";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../stores";
 import { TaskSection, Task } from "../types";
-import { InputSectionNameAction } from "../actions/sections";
+import { AddTaskCardAction, InputSectionNameAction } from "../actions/sections";
 
 interface Props {
   taskSectionId: string;
@@ -20,11 +20,16 @@ const TaskSectionCard = (props: Props) => {
     .map((section: TaskSection) =>
       section.tasks.map((task: Task) => tasks.push(task))
     );
+
   const dispatch = useDispatch();
   const onInputSectionName = (
     event: React.ChangeEvent<HTMLTextAreaElement>
   ) => {
     dispatch(InputSectionNameAction(props.taskSectionId, event.target.value));
+  };
+
+  const onAddTaskCard = () => {
+    dispatch(AddTaskCardAction(props.taskSectionId));
   };
 
   return (
@@ -50,7 +55,7 @@ const TaskSectionCard = (props: Props) => {
             taskCardId={task.taskId}
           />
         ))}
-        <Button sx={{ m: 0, p: 0 }}>
+        <Button sx={{ m: 0, p: 0 }} onClick={onAddTaskCard}>
           <AddIcon />
         </Button>
       </CardContent>

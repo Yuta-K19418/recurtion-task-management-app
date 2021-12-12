@@ -25,7 +25,20 @@ const SectionsReducer = (
       return {
         ...state,
         sections: [...state.sections],
-      }
+      };
+    case "ADD_CARD":
+      state.sections
+        .filter(
+          (section: TaskSection) =>
+            section.taskSectionId === action.payload.taskSection.taskSectionId
+        )
+        .map((section: TaskSection) =>
+          section.tasks.push(action.payload.taskSection.tasks[0])
+        );
+      return {
+        ...state,
+        sections: [...state.sections],
+      };
     default:
       return state;
   }
