@@ -2,14 +2,7 @@ import Input from "@mui/icons-material/Input";
 import Star from "@mui/icons-material/Star";
 import Check from "@mui/icons-material/Check";
 import DeleteTwoToneIcon from "@mui/icons-material/DeleteTwoTone";
-import {
-  Box,
-  Card,
-  CardContent,
-  IconButton,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Card, CardContent, IconButton, TextField, Typography } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { DeleteTaskCardAction } from "../actions/sections";
 import { useState } from "react";

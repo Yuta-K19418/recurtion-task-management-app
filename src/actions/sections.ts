@@ -21,10 +21,7 @@ export const AddSectionAction = (): SectionsType["action"] => {
   };
 };
 
-export const InputSectionNameAction = (
-  taskSectionId: string,
-  inputName: string
-): SectionsType["action"] => {
+export const InputSectionNameAction = (taskSectionId: string, inputName: string): SectionsType["action"] => {
   return {
     type: ACTION_TYPE.INPUT_SECTION_NAME,
     payload: {
@@ -37,9 +34,7 @@ export const InputSectionNameAction = (
   };
 };
 
-export const AddTaskCardAction = (
-  taskSectionId: string
-): SectionsType["action"] => {
+export const AddTaskCardAction = (taskSectionId: string): SectionsType["action"] => {
   return {
     type: ACTION_TYPE.ADD_CARD,
     payload: {
@@ -57,10 +52,7 @@ export const AddTaskCardAction = (
   };
 };
 
-export const DeleteTaskCardAction = (
-  taskSectionId: string,
-  taskId: string
-): SectionsType["action"] => {
+export const DeleteTaskCardAction = (taskSectionId: string, taskId: string): SectionsType["action"] => {
   return {
     type: ACTION_TYPE.DELETE_CARD,
     payload: {
