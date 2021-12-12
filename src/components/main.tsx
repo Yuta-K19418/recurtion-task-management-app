@@ -19,7 +19,8 @@ const Main = () => {
       {sections.map((section: TaskSection) => (
         <TaskSectionCard
           key={section.taskSectionId}
-          id={section.taskSectionId}
+          taskSectionId={section.taskSectionId}
+          taskSectionName={section.taskSectionName}
         />
       ))}
       <AddSectionButton />

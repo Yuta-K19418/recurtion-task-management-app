@@ -10,7 +10,12 @@ const AddSectionAction = (): SectionsType["action"] => {
       taskSection: {
         taskSectionId: shortid.generate(),
         taskSectionName: "",
-        tasks: [],
+        tasks: [
+          {
+            taskId: shortid.generate(),
+            taskName: "",
+          },
+        ],
       },
     },
   };

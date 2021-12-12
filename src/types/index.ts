@@ -12,12 +12,12 @@ type sectionsStateType = {
 export type TaskSection = {
   taskSectionId: string;
   taskSectionName: string;
-  tasks: taskCard[];
+  tasks: Task[];
 };
 
-type taskCard = {
-  taskCardId: string;
-  taskCardName: string;
+export type Task = {
+  taskId: string;
+  taskName: string;
 };
 
 type SectionsActionType = {
