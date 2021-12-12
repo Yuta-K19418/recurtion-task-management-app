@@ -3,7 +3,7 @@ import ACTION_TYPE from "./index";
 
 const shortid = require("shortid");
 
-const AddSectionAction = (): SectionsType["action"] => {
+export const AddSectionAction = (): SectionsType["action"] => {
   return {
     type: ACTION_TYPE.ADD_SECTION,
     payload: {
@@ -21,4 +21,18 @@ const AddSectionAction = (): SectionsType["action"] => {
   };
 };
 
-export default AddSectionAction;
+export const InputSectionNameAction = (
+  taskSectionId: string,
+  inputName: string
+): SectionsType["action"] => {
+  return {
+    type: ACTION_TYPE.INPUT_SECTION_NAME,
+    payload: {
+      taskSection: {
+        taskSectionId: taskSectionId,
+        taskSectionName: inputName,
+        tasks: [],
+      },
+    },
+  };
+};

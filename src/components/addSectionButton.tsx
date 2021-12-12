@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import { useDispatch } from "react-redux";
-import AddSectionAction from "../actions/sections";
+import { AddSectionAction } from "../actions/sections";
 
 const AddSectionButton = () => {
   const dispatch = useDispatch();

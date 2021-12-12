@@ -1,9 +1,10 @@
 import { Button, Card, CardContent, TextField } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import TaskCard from "./taskCard";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../stores";
 import { TaskSection, Task } from "../types";
+import { InputSectionNameAction } from "../actions/sections";
 
 interface Props {
   taskSectionId: string;
@@ -19,6 +20,13 @@ const TaskSectionCard = (props: Props) => {
     .map((section: TaskSection) =>
       section.tasks.map((task: Task) => tasks.push(task))
     );
+  const dispatch = useDispatch();
+  const onInputSectionName = (
+    event: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    dispatch(InputSectionNameAction(props.taskSectionId, event.target.value));
+  };
+
   return (
     <Card sx={{ width: 250, m: 1 }}>
       <CardContent sx={{ pb: 2 }}>
@@ -28,17 +36,20 @@ const TaskSectionCard = (props: Props) => {
               variant="standard"
               size="small"
               placeholder="Section Name"
+              onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) =>
+                onInputSectionName(event)
+              }
             />
           </CardContent>
         </Card>
-          {tasks.map((task: Task) => (
-            <TaskCard
-              key={task.taskId}
-              taskSectionId={props.taskSectionId}
-              taskSectionName={props.taskSectionName}
-              taskCardId={task.taskId}
-            />
-          ))}
+        {tasks.map((task: Task) => (
+          <TaskCard
+            key={task.taskId}
+            taskSectionId={props.taskSectionId}
+            taskSectionName={props.taskSectionName}
+            taskCardId={task.taskId}
+          />
+        ))}
         <Button sx={{ m: 0, p: 0 }}>
           <AddIcon />
         </Button>

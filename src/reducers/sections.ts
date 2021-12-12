@@ -1,5 +1,5 @@
 import { initialSectionState } from "../stores/initialState";
-import { SectionsType } from "../types/index";
+import { SectionsType, TaskSection } from "../types/index";
 
 const SectionsReducer = (
   state = initialSectionState,
@@ -11,6 +11,21 @@ const SectionsReducer = (
         ...state,
         sections: [...state.sections, action.payload.taskSection],
       };
+    case "INPUT_SECTION_NAME":
+      state.sections
+        .filter(
+          (section: TaskSection) =>
+            section.taskSectionId === action.payload.taskSection.taskSectionId
+        )
+        .map(
+          (section: TaskSection) =>
+            (section.taskSectionName =
+              action.payload.taskSection.taskSectionName)
+        );
+      return {
+        ...state,
+        sections: [...state.sections],
+      }
     default:
       return state;
   }
