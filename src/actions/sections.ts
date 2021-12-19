@@ -69,3 +69,25 @@ export const DeleteTaskCardAction = (taskSectionId: string, taskId: string): Sec
     },
   };
 };
+
+export const InputTaskCardNameAction = (
+  taskSectionId: string,
+  taskId: string,
+  inputName: string
+): SectionsType["action"] => {
+  return {
+    type: ACTION_TYPE.INPUT_TASK_CARD_NAME,
+    payload: {
+      taskSection: {
+        taskSectionId: taskSectionId,
+        taskSectionName: "",
+        tasks: [
+          {
+            taskId: taskId,
+            taskName: inputName,
+          },
+        ],
+      },
+    },
+  };
+};

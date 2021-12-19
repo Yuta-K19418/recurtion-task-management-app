@@ -4,14 +4,15 @@ import Check from "@mui/icons-material/Check";
 import DeleteTwoToneIcon from "@mui/icons-material/DeleteTwoTone";
 import { Box, Card, CardContent, IconButton, TextField, Typography } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { DeleteTaskCardAction } from "../actions/sections";
-import { useState } from "react";
+import { DeleteTaskCardAction, InputTaskCardNameAction } from "../actions/sections";
+import React, { useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
 
 interface Props {
   taskSectionId: string;
   taskSectionName: string;
   taskId: string;
+  taskName: string;
   index: number;
 }
 
@@ -30,18 +31,36 @@ const TaskCard = (props: Props) => {
     setStarButtonState(!starButtonState);
   };
 
+  const inputProps = {
+    taskname: props.taskName,
+  };
+
   const dispatch = useDispatch();
   const onDeleteTaskCard = () => {
     dispatch(DeleteTaskCardAction(props.taskSectionId, props.taskId));
   };
 
+  const onInputTaskCardName = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    dispatch(InputTaskCardNameAction(props.taskSectionId, props.taskId, event.target.value));
+  };
+
   return (
-    <Draggable draggableId={props.taskId} index={props.index}>
+    <Draggable
+      key={`draggable-task-card-${props.taskId}`}
+      draggableId={`draggable-task-card-${props.taskId}`}
+      index={props.index}
+    >
       {(provided) => (
         <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
           <Card sx={{ height: 140, p: 0, mb: 1 }}>
             <CardContent>
-              <TextField variant="standard" size="small" placeholder="Task Name" />
+              <TextField
+                variant="standard"
+                size="small"
+                placeholder="Task Name"
+                inputProps={inputProps}
+                onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => onInputTaskCardName(event)}
+              />
               <Typography sx={{ mt: 2 }} color="#808080">
                 Section Name
                 {props.taskSectionName === "" ? "" : `: ${props.taskSectionName}`}
