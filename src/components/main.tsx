@@ -10,6 +10,7 @@ const style = {
   padding: 20,
   display: "flex",
   alignItems: "flex-start",
+  overflow: "auto",
 };
 
 const Main = () => {
