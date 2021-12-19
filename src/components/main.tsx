@@ -16,7 +16,6 @@ const Main = () => {
   const dispatch = useDispatch();
   const sections = useSelector((state: RootState) => state.sections["sections"]);
   const onDragEnd = (result: DropResult) => {
-      console.log(result);
     dispatch(
       SortSectonTasksAndTasks(
         result.source.droppableId,

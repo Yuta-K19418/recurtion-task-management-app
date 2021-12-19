@@ -18,16 +18,17 @@ const SortSectonTasksAndTasks = (
     if (droppableIdStart === droppableIdEnd) {
       const taskSectionId = droppableIdStart.replace("droppable-", "");
       let tasks: Task[] = [];
-      sections.filter((section: TaskSection) => section.taskSectionId === taskSectionId)
+      sections
+        .filter((section: TaskSection) => section.taskSectionId === taskSectionId)
         .map((section: TaskSection) => tasks.push(...section.tasks));
       const draggedTaskCard = tasks.splice(droppableIndexStart, 1);
       tasks.splice(droppableIndexEnd, 0, ...draggedTaskCard);
       const newSections = sections.map((section: TaskSection) => {
         if (section.taskSectionId === taskSectionId) {
-            section.tasks = tasks;
+          section.tasks = tasks;
         }
         return section;
-      })
+      });
       return dispatch(SortAction(newSections));
     }
     // other list
