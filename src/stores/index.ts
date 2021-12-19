@@ -1,4 +1,5 @@
-import { createStore, combineReducers } from "redux";
+import { createStore, combineReducers, applyMiddleware} from "redux";
+import thunk from "redux-thunk";
 import SectionsReducer from "../reducers/sections";
 
 const rootReducer = combineReducers({
@@ -6,4 +7,4 @@ const rootReducer = combineReducers({
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
-export const Store = createStore(rootReducer);
+export const Store = createStore(rootReducer, applyMiddleware(thunk));

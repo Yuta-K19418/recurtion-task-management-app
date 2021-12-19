@@ -23,6 +23,6 @@ export type Task = {
 type SectionsActionType = {
   type: keyof typeof ACTION_TYPE;
   payload: {
-    taskSection: TaskSection;
+    sections: TaskSection[];
   };
 };

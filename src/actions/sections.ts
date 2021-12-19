@@ -1,4 +1,4 @@
-import { SectionsType } from "../types/index";
+import { SectionsType, TaskSection } from "../types/index";
 import ACTION_TYPE from "./index";
 
 const shortid = require("shortid");
@@ -7,16 +7,18 @@ export const AddSectionAction = (): SectionsType["action"] => {
   return {
     type: ACTION_TYPE.ADD_SECTION,
     payload: {
-      taskSection: {
-        taskSectionId: shortid.generate(),
-        taskSectionName: "",
-        tasks: [
-          {
-            taskId: shortid.generate(),
-            taskName: "",
-          },
-        ],
-      },
+      sections: [
+        {
+          taskSectionId: shortid.generate(),
+          taskSectionName: "",
+          tasks: [
+            {
+              taskId: shortid.generate(),
+              taskName: "",
+            },
+          ],
+        },
+      ],
     },
   };
 };
@@ -25,11 +27,13 @@ export const InputSectionNameAction = (taskSectionId: string, inputName: string)
   return {
     type: ACTION_TYPE.INPUT_SECTION_NAME,
     payload: {
-      taskSection: {
-        taskSectionId: taskSectionId,
-        taskSectionName: inputName,
-        tasks: [],
-      },
+      sections: [
+        {
+          taskSectionId: taskSectionId,
+          taskSectionName: inputName,
+          tasks: [],
+        },
+      ],
     },
   };
 };
@@ -38,16 +42,18 @@ export const AddTaskCardAction = (taskSectionId: string): SectionsType["action"]
   return {
     type: ACTION_TYPE.ADD_CARD,
     payload: {
-      taskSection: {
-        taskSectionId: taskSectionId,
-        taskSectionName: "",
-        tasks: [
-          {
-            taskId: shortid.generate(),
-            taskName: "",
-          },
-        ],
-      },
+      sections: [
+        {
+          taskSectionId: taskSectionId,
+          taskSectionName: "",
+          tasks: [
+            {
+              taskId: shortid.generate(),
+              taskName: "",
+            },
+          ],
+        },
+      ],
     },
   };
 };
@@ -56,16 +62,18 @@ export const DeleteTaskCardAction = (taskSectionId: string, taskId: string): Sec
   return {
     type: ACTION_TYPE.DELETE_CARD,
     payload: {
-      taskSection: {
-        taskSectionId: taskSectionId,
-        taskSectionName: "",
-        tasks: [
-          {
-            taskId: taskId,
-            taskName: "",
-          },
-        ],
-      },
+      sections: [
+        {
+          taskSectionId: taskSectionId,
+          taskSectionName: "",
+          tasks: [
+            {
+              taskId: taskId,
+              taskName: "",
+            },
+          ],
+        },
+      ],
     },
   };
 };
@@ -78,16 +86,27 @@ export const InputTaskCardNameAction = (
   return {
     type: ACTION_TYPE.INPUT_TASK_CARD_NAME,
     payload: {
-      taskSection: {
-        taskSectionId: taskSectionId,
-        taskSectionName: "",
-        tasks: [
-          {
-            taskId: taskId,
-            taskName: inputName,
-          },
-        ],
-      },
+      sections: [
+        {
+          taskSectionId: taskSectionId,
+          taskSectionName: "",
+          tasks: [
+            {
+              taskId: taskId,
+              taskName: inputName,
+            },
+          ],
+        },
+      ],
+    },
+  };
+};
+
+export const SortAction = (sections: TaskSection[]): SectionsType["action"] => {
+  return {
+    type: ACTION_TYPE.DRAG_HAPPENED,
+    payload: {
+      sections: sections,
     },
   };
 };

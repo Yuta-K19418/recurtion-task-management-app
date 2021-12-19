@@ -3,16 +3,17 @@ import Star from "@mui/icons-material/Star";
 import Check from "@mui/icons-material/Check";
 import DeleteTwoToneIcon from "@mui/icons-material/DeleteTwoTone";
 import { Box, Card, CardContent, IconButton, TextField, Typography } from "@mui/material";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { DeleteTaskCardAction, InputTaskCardNameAction } from "../actions/sections";
 import React, { useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
+import { RootState } from "../stores";
+import { Task, TaskSection } from "../types";
 
 interface Props {
   taskSectionId: string;
   taskSectionName: string;
   taskId: string;
-  taskName: string;
   index: number;
 }
 
@@ -31,9 +32,19 @@ const TaskCard = (props: Props) => {
     setStarButtonState(!starButtonState);
   };
 
-  const inputProps = {
-    taskname: props.taskName,
-  };
+  let tasks: Task[] = [];
+  useSelector((state: RootState) => state.sections["sections"])
+  .map((section: TaskSection) => {
+    if (section.taskSectionId === props.taskSectionId) {
+      section.tasks.map((task: Task) => {
+        if (task.taskId === props.taskId) {
+          tasks.push(task);
+        }
+        return task;
+      })
+    }
+    return section;
+  })
 
   const dispatch = useDispatch();
   const onDeleteTaskCard = () => {
@@ -58,7 +69,7 @@ const TaskCard = (props: Props) => {
                 variant="standard"
                 size="small"
                 placeholder="Task Name"
-                inputProps={inputProps}
+                value={tasks[0].taskName}
                 onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => onInputTaskCardName(event)}
               />
               <Typography sx={{ mt: 2 }} color="#808080">

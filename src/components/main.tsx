@@ -1,5 +1,6 @@
 import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import SortSectonTasksAndTasks from "../operations/sections";
 import { RootState } from "../stores";
 import { TaskSection } from "../types";
 import AddSectionButton from "./addSectionButton";
@@ -12,17 +13,32 @@ const style = {
 };
 
 const Main = () => {
+  const dispatch = useDispatch();
   const sections = useSelector((state: RootState) => state.sections["sections"]);
   const onDragEnd = (result: DropResult) => {
-    const draggedSection = sections.splice(result.source.index, 1);
-    sections.splice(result.destination!.index, 0, ...draggedSection);
+      console.log(result);
+    dispatch(
+      SortSectonTasksAndTasks(
+        result.source.droppableId,
+        result.destination!.droppableId,
+        result.source.index,
+        result.destination!.index,
+        result.draggableId,
+        result.type
+      )
+    );
   };
 
   return (
-    <div style={style}>
-      {sections.map((section: TaskSection, index: number) => (
-        <DragDropContext onDragEnd={(result: DropResult) => onDragEnd(result)}>
-          <Droppable droppableId={section.taskSectionId} direction="horizontal" type="sections">
+    <DragDropContext key={"main"} onDragEnd={(result: DropResult) => onDragEnd(result)}>
+      <div style={style}>
+        {sections.map((section: TaskSection, index: number) => (
+          <Droppable
+            key={`droppable-task-section-${section.taskSectionId}`}
+            droppableId={`droppable-task-section-${section.taskSectionId}`}
+            direction="horizontal"
+            type="sections"
+          >
             {(provided) => (
               <div {...provided.droppableProps} ref={provided.innerRef}>
                 <TaskSectionCard
@@ -35,10 +51,10 @@ const Main = () => {
               </div>
             )}
           </Droppable>
-        </DragDropContext>
-      ))}
-      <AddSectionButton />
-    </div>
+        ))}
+        <AddSectionButton />
+      </div>
+    </DragDropContext>
   );
 };
 
