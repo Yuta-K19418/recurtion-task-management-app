@@ -8,7 +8,7 @@ const AddSectionButton = () => {
     dispatch(AddSectionAction());
   };
   return (
-    <Button color="inherit" variant="contained" sx={{minWidth: 135, mt: 2, mx: 1 }} onClick={onAddSection}>
+    <Button color="inherit" variant="contained" sx={{ minWidth: 135, mt: 2, mx: 1 }} onClick={onAddSection}>
       ADD SECTION
     </Button>
   );
