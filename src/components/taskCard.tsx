@@ -4,7 +4,7 @@ import Check from "@mui/icons-material/Check";
 import DeleteTwoToneIcon from "@mui/icons-material/DeleteTwoTone";
 import { Box, Card, CardContent, IconButton, TextField, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { DeleteTaskCardAction, InputTaskCardNameAction } from "../actions/sections";
+import { DeleteTaskCardAction, InputTaskCardNameAction, InputTaskContentAction } from "../actions/sections";
 import React, { useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { RootState } from "../stores";
@@ -33,18 +33,17 @@ const TaskCard = (props: Props) => {
   };
 
   let tasks: Task[] = [];
-  useSelector((state: RootState) => state.sections["sections"])
-  .map((section: TaskSection) => {
+  useSelector((state: RootState) => state.sections["sections"]).map((section: TaskSection) => {
     if (section.taskSectionId === props.taskSectionId) {
       section.tasks.map((task: Task) => {
         if (task.taskId === props.taskId) {
           tasks.push(task);
         }
         return task;
-      })
+      });
     }
     return section;
-  })
+  });
 
   const dispatch = useDispatch();
   const onDeleteTaskCard = () => {
@@ -55,6 +54,11 @@ const TaskCard = (props: Props) => {
     dispatch(InputTaskCardNameAction(props.taskSectionId, props.taskId, event.target.value));
   };
 
+  const onInputTaskContent = (event: React.FocusEvent<HTMLTextAreaElement>) => {
+    dispatch(InputTaskContentAction(props.taskSectionId, props.taskId, event.target.value));
+    setInputButtonState(false);
+  };
+
   return (
     <Draggable
       key={`draggable-task-card-${props.taskId}`}
@@ -63,7 +67,7 @@ const TaskCard = (props: Props) => {
     >
       {(provided) => (
         <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
-          <Card sx={{ height: 140, p: 0, mb: 1 }}>
+          <Card sx={{ p: 0, mb: 1 }}>
             <CardContent>
               <TextField
                 variant="standard"
@@ -76,14 +80,20 @@ const TaskCard = (props: Props) => {
                 Section Name
                 {props.taskSectionName === "" ? "" : `: ${props.taskSectionName}`}
               </Typography>
+              {!inputButtonState ? (
+                <Typography sx={{ mt: 2 }} color="#808080">
+                  {tasks[0].taskContent}
+                </Typography>
+              ) : undefined}
+              {inputButtonState ? (
+                <TextField
+                  variant="outlined"
+                  defaultValue={tasks[0].taskContent}
+                  onBlur={(event: React.FocusEvent<HTMLTextAreaElement>) => onInputTaskContent(event)}
+                />
+              ) : undefined}
               <Box sx={{ display: "inline-flex", justifyContent: "flex-end" }}>
-                <IconButton
-                  color={inputButtonState ? "success" : "default"}
-                  style={{
-                    backgroundColor: inputButtonState ? "#DDDDDD" : "transparent",
-                  }}
-                  onClick={onInput}
-                >
+                <IconButton color={inputButtonState ? "success" : "default"} onClick={onInput}>
                   <Input />
                 </IconButton>
                 <IconButton

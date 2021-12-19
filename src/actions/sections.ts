@@ -15,6 +15,7 @@ export const AddSectionAction = (): SectionsType["action"] => {
             {
               taskId: shortid.generate(),
               taskName: "",
+              taskContent: "",
             },
           ],
         },
@@ -50,6 +51,7 @@ export const AddTaskCardAction = (taskSectionId: string): SectionsType["action"]
             {
               taskId: shortid.generate(),
               taskName: "",
+              taskContent: "",
             },
           ],
         },
@@ -70,6 +72,7 @@ export const DeleteTaskCardAction = (taskSectionId: string, taskId: string): Sec
             {
               taskId: taskId,
               taskName: "",
+              taskContent: "",
             },
           ],
         },
@@ -94,6 +97,32 @@ export const InputTaskCardNameAction = (
             {
               taskId: taskId,
               taskName: inputName,
+              taskContent: "",
+            },
+          ],
+        },
+      ],
+    },
+  };
+};
+
+export const InputTaskContentAction = (
+  taskSectionId: string,
+  taskId: string,
+  inputContent: string
+): SectionsType["action"] => {
+  return {
+    type: ACTION_TYPE.INPUT_TASK_CONTENT,
+    payload: {
+      sections: [
+        {
+          taskSectionId: taskSectionId,
+          taskSectionName: "",
+          tasks: [
+            {
+              taskId: taskId,
+              taskName: "",
+              taskContent: inputContent,
             },
           ],
         },

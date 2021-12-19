@@ -18,6 +18,7 @@ export type TaskSection = {
 export type Task = {
   taskId: string;
   taskName: string;
+  taskContent: string;
 };
 
 type SectionsActionType = {

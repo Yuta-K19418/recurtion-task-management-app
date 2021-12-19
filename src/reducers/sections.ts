@@ -62,6 +62,25 @@ const SectionsReducer = (state = initialSectionState, action: SectionsType["acti
         sections: [...state.sections],
       };
 
+    case "INPUT_TASK_CONTENT":
+      state.sections.map((section: TaskSection) => {
+        if (section.taskSectionId === action.payload.sections[0].taskSectionId) {
+          const newTasks: Task[] = section.tasks.map((task: Task) => {
+            if (task.taskId === action.payload.sections[0].tasks[0].taskId) {
+              task.taskContent = action.payload.sections[0].tasks[0].taskContent;
+            }
+            return task;
+          });
+          section.tasks = newTasks;
+        }
+        return section;
+      });
+
+      return {
+        ...state,
+        sections: [...state.sections],
+      };
+
     case "DRAG_HAPPENED":
       state.sections = action.payload.sections;
       return {
