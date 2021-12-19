@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/recurtion-task-management-app/static/css/main.6dea0f05.chunk.css",
+    "main.js": "/recurtion-task-management-app/static/js/main.d35588a9.chunk.js",
+    "main.js.map": "/recurtion-task-management-app/static/js/main.d35588a9.chunk.js.map",
+    "runtime-main.js": "/recurtion-task-management-app/static/js/runtime-main.3d685e35.js",
+    "runtime-main.js.map": "/recurtion-task-management-app/static/js/runtime-main.3d685e35.js.map",
+    "static/js/2.1e025fc1.chunk.js": "/recurtion-task-management-app/static/js/2.1e025fc1.chunk.js",
+    "static/js/2.1e025fc1.chunk.js.map": "/recurtion-task-management-app/static/js/2.1e025fc1.chunk.js.map",
+    "index.html": "/recurtion-task-management-app/index.html",
+    "static/css/main.6dea0f05.chunk.css.map": "/recurtion-task-management-app/static/css/main.6dea0f05.chunk.css.map",
+    "static/js/2.1e025fc1.chunk.js.LICENSE.txt": "/recurtion-task-management-app/static/js/2.1e025fc1.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.3d685e35.js",
+    "static/js/2.1e025fc1.chunk.js",
+    "static/css/main.6dea0f05.chunk.css",
+    "static/js/main.d35588a9.chunk.js"
+  ]
+}
